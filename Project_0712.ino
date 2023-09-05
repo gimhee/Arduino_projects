@@ -11,7 +11,7 @@
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
 const int trig_pin = 15;
-const int echo_pin = 14;
+const int echo_pin = 14 ;
 const int Buzzer = 6;
 const int RED_LED = 7;
 const int GREEN_LED = 10;
@@ -19,10 +19,16 @@ const int SW1 = 3;
 const int SW2 = 4;
 const int RELAY = 22;
 
+int S1, S2;
+
 long ultrason_duration;
 float distance_cm;
 
 void setup() {
+
+  int S1 = 1;
+  int S2 = 1;
+
   pinMode(trig_pin, OUTPUT);
   pinMode(echo_pin, INPUT);
   pinMode(Buzzer, OUTPUT);
@@ -61,6 +67,14 @@ void setup() {
 
 void loop() {
   if (digitalRead(SW1)==0){
+    S1 = ~S1;
+  }
+  if (digitalRead(SW2)==0){
+    S2 = ~S2;
+  }
+  
+  if (S1 == 0)
+  {
     digitalWrite(trig_pin, LOW);
     delayMicroseconds(2);
     digitalWrite(trig_pin, HIGH);
@@ -92,7 +106,9 @@ void loop() {
       digitalWrite(RELAY, 1);
     }
   }
-  else if(digitalRead(SW2)==0){
+
+
+  if(S2 == 0){
     int CDS_sensor = analogRead(26);
     if (CDS_sensor > 600) {
       digitalWrite(RED_LED, 0);

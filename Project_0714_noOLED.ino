@@ -1,14 +1,14 @@
-#include <Wire.h>
+//#include <Wire.h>
 #include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+//#include <Adafruit_SSD1306.h>
 
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 64
+//#define SCREEN_WIDTH 128
+//#define SCREEN_HEIGHT 64
 #define SOUND_SPEED 340
 #define TRIG_PULSE_DURATION_US 10
 #define PIN_CDS 26
 
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+//Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
 const int trig_pin = 15;
 const int echo_pin = 14;
@@ -35,7 +35,7 @@ void setup() {
   pinMode(SW1, INPUT);
   pinMode(SW2, INPUT);
 
-  Wire.setSDA(12);
+  /*Wire.setSDA(12);
   Wire.setSCL(13);
 
   Wire.begin();
@@ -56,7 +56,7 @@ void setup() {
   display.display();
   delay(1000);
   display.clearDisplay();
-  display.display();
+  display.display();*/
 }
 
 void loop() {
@@ -71,13 +71,13 @@ void loop() {
 
     distance_cm=ultrason_duration*SOUND_SPEED/2*0.0001;
 
-    delay(500);
+    /*delay(500);
     display.clearDisplay();
     display.setTextSize(3);
     display.setTextColor(WHITE);
     display.setCursor(0, 10); // setCursor 없으면 값이 계속 오른쪽으로 이동해서 입력됨
     display.println(distance_cm);
-    display.display();
+    display.display();*/
 
     if (distance_cm <=3){
       tone(Buzzer, 200);
